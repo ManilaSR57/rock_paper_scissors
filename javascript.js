@@ -22,7 +22,7 @@ function getPlayerChoice() {
     }
 }
 
-
+/*
 function playRound() {
     let playerSelection = getPlayerChoice();
     let computerChoice = getComputerChoice();
@@ -54,6 +54,41 @@ function playRound() {
             return 'You Win! Scissors beat Paper!';
         } else if (computerSelection === 'scissors') {
             return 'Tie! Scissors vs Scissors';
+        }
+    }
+}
+*/
+
+function playRound() {
+    const computerSelection = getComputerChoice();
+    const playerSelection = getPlayerChoice();
+
+    if (playerSelection === computerSelection) {
+        console.log("Tie! One More Time!");
+        return playRound();
+    }
+
+    if (playerSelection === 'rock') {
+        if (computerSelection === 'paper') {
+            return 'You Lose! Paper beats Rock!';
+        } else if (computerSelection === 'scissors') {
+            return 'You Win! Rock beats Scissisors!';
+        }
+    }
+    
+    if (playerSelection === 'paper') {
+        if (computerSelection === 'rock') {
+            return 'You Win! Paper beats Rock!';
+        } else if (computerSelection === 'scissors') {
+            return 'You Lose! Scissors beat Paper!';
+        }
+    }
+
+    if (playerSelection === 'scissors') {
+        if (computerSelection === 'rock') {
+            return 'You Lose! Rock beats Scissors!';
+        } else if (computerSelection === 'paper') {
+            return 'You Win! Scissors beat Paper!';
         }
     }
 }
