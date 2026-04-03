@@ -121,5 +121,5 @@ function playGame() {
 }
 
 
-playGame();
+//playGame();
 //console.log(playRound());
