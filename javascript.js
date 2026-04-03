@@ -60,9 +60,22 @@ function playRound() {
 }
 */
 
-function playRound() {
+function getPlayerChoiceByBtnId(btnId) {
+    switch (btnId) {
+        case "rock-btn":
+            return "rock";
+        case "paper-btn":
+            return "paper";
+        case "scissors-btn":
+            return "scissors";
+        default:
+            return "ERROR: Invalid button id!";
+    }
+}
+
+function playRound(eventBtn) {
     const computerSelection = getComputerChoice();
-    const playerSelection = getPlayerChoice();
+    const playerSelection = getPlayerChoiceByBtnId(eventBtn.target.id);
 
     if (playerSelection === computerSelection) {
         console.log("Tie! One More Time!");
@@ -72,25 +85,38 @@ function playRound() {
 
     if (playerSelection === 'rock') {
         if (computerSelection === 'paper') {
-            return ['computer', 'You Lose! Paper beats Rock!'];
+            //return ['computer', 'You Lose! Paper beats Rock!'];
+            computerScore += 1;
+            compScoreDisplay.textContent = computerScore;
+
         } else if (computerSelection === 'scissors') {
-            return ['player', 'You Win! Rock beats Scissisors!'];
+            //return ['player', 'You Win! Rock beats Scissisors!'];
+            playerScore += 1;
+            playerScoreDisplay.textContent = playerScore;
         }
     }
     
     if (playerSelection === 'paper') {
         if (computerSelection === 'rock') {
-            return ['player', 'You Win! Paper beats Rock!'];
+            //return ['player', 'You Win! Paper beats Rock!'];
+            playerScore += 1;
+            playerScoreDisplay.textContent = playerScore;
         } else if (computerSelection === 'scissors') {
-            return ['computer', 'You Lose! Scissors beat Paper!'];
+            //return ['computer', 'You Lose! Scissors beat Paper!'];
+            computerScore += 1;
+            compScoreDisplay.textContent = computerScore;
         }
     }
 
     if (playerSelection === 'scissors') {
         if (computerSelection === 'rock') {
-            return ['computer', 'You Lose! Rock beats Scissors!'];
+            //return ['computer', 'You Lose! Rock beats Scissors!'];
+            computerScore += 1;
+            compScoreDisplay.textContent = computerScore;
         } else if (computerSelection === 'paper') {
-            return ['player', 'You Win! Scissors beat Paper!'];
+            //return ['player', 'You Win! Scissors beat Paper!'];
+            playerScore += 1;
+            playerScoreDisplay.textContent = playerScore;
         }
     }
 }
@@ -123,3 +149,20 @@ function playGame() {
 
 //playGame();
 //console.log(playRound());
+
+let computerScore = 0;
+let playerScore = 0;
+let gameResult = 0;
+
+const playerScoreDisplay = document.querySelector("#player-score")
+const compScoreDisplay = document.querySelector("#computer-score");
+
+const rock = document.querySelector("#rock-btn");
+const paper = document.querySelector("#paper-btn");
+const scissors = document.querySelector("#scissors-btn");
+
+rock.addEventListener("click", playRound);
+paper.addEventListener("click", playRound);
+scissors.addEventListener("click", playRound);
+
+let roundResult = 0;
