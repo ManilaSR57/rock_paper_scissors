@@ -78,7 +78,11 @@ function restartGame(event) {
     computerScore = 0;
     playerScoreDisplay.textContent = "0";
     compScoreDisplay.textContent = "0";
-    event.target.parentNode.removeChild(event.target);
+    event.target.parentNode.removeChild(event.target);  // remove restart button
+    // add back the rock, paper, scissors action buttons
+    btnContainer.appendChild(rock);
+    btnContainer.appendChild(paper);
+    btnContainer.appendChild(scissors);
 }
 
 function isGameOver() {
@@ -94,6 +98,9 @@ function endGame() {
     } else {
         console.log('You Lost! Game Over...')
     }
+    btnContainer.removeChild(rock);
+    btnContainer.removeChild(paper);
+    btnContainer.removeChild(scissors);
     btnContainer.appendChild(restartBtn);
 }
 
