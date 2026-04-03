@@ -88,7 +88,7 @@ function isGameOver() {
     return false;
 }
 
-function gameOver() {
+function endGame() {
     if (playerScore > computerScore) {
         console.log("You win the game! Congratulations!")
     } else {
@@ -101,11 +101,11 @@ function playRound(eventBtn) {
     const computerSelection = getComputerChoice();
     const playerSelection = getPlayerChoiceByBtnId(eventBtn.target.id);
 
-    if (playerSelection === computerSelection) {
-        console.log("Tie! One More Time!");
-        // Keep Playing in Case of Tie
-        return playRound();
-    }
+    // if (playerSelection === computerSelection) {
+    //     console.log("Tie! One More Time!");
+    //     // Keep Playing in Case of Tie
+    //     return playRound();
+    // }
 
     if (playerSelection === 'rock') {
         if (computerSelection === 'paper') {
@@ -144,7 +144,7 @@ function playRound(eventBtn) {
         }
     }
 
-    if (isGameOver) {
+    if (isGameOver()) {
         endGame();
     }
 }
