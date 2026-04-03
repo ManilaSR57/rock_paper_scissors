@@ -73,6 +73,30 @@ function getPlayerChoiceByBtnId(btnId) {
     }
 }
 
+function restartGame(event) {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = "0";
+    compScoreDisplay.textContent = "0";
+    event.target.parentNode.removeChild(event.target);
+}
+
+function isGameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        return true;
+    }
+    return false;
+}
+
+function gameOver() {
+    if (playerScore > computerScore) {
+        console.log("You win the game! Congratulations!")
+    } else {
+        console.log('You Lost! Game Over...')
+    }
+    btnContainer.appendChild(restartBtn);
+}
+
 function playRound(eventBtn) {
     const computerSelection = getComputerChoice();
     const playerSelection = getPlayerChoiceByBtnId(eventBtn.target.id);
@@ -85,7 +109,7 @@ function playRound(eventBtn) {
 
     if (playerSelection === 'rock') {
         if (computerSelection === 'paper') {
-            //return ['computer', 'You Lose! Paper beats Rock!'];
+            //return ['computer', 'You Lose! Paper beats Rock!']
             computerScore += 1;
             compScoreDisplay.textContent = computerScore;
 
@@ -118,6 +142,10 @@ function playRound(eventBtn) {
             playerScore += 1;
             playerScoreDisplay.textContent = playerScore;
         }
+    }
+
+    if (isGameOver) {
+        endGame();
     }
 }
 
@@ -157,6 +185,7 @@ let gameResult = 0;
 const playerScoreDisplay = document.querySelector("#player-score")
 const compScoreDisplay = document.querySelector("#computer-score");
 
+const btnContainer = document.querySelector("#btn-container");
 const rock = document.querySelector("#rock-btn");
 const paper = document.querySelector("#paper-btn");
 const scissors = document.querySelector("#scissors-btn");
@@ -166,3 +195,7 @@ paper.addEventListener("click", playRound);
 scissors.addEventListener("click", playRound);
 
 let roundResult = 0;
+
+const restartBtn = document.createElement("button");
+restartBtn.textContent = "Restart";
+restartBtn.addEventListener("click", restartGame);
